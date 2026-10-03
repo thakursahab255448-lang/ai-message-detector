@@ -1,0 +1,659 @@
+Copy this into a file named **`index.html`** in your GitHub repository. It’s a single-file demo, so no installation is needed.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignalShield — Social Engineering Detector</title>
+  <style>
+    :root {
+      --ink: #14263f;
+      --muted: #718096;
+      --line: #e4eaf2;
+      --paper: #f4f7fb;
+      --blue: #2864e8;
+      --navy: #102746;
+      --red: #d54b55;
+      --amber: #b8750b;
+      --green: #198268;
+      --shadow: 0 12px 38px #10274612;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .top {
+      height: 68px;
+      background: var(--navy);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(calc((100vw - 1180px) / 2), 24px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 750;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: #1e75e9;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+    }
+
+    .top small {
+      opacity: .76;
+      letter-spacing: 1.1px;
+      font-size: 11px;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 22px;
+    }
+
+    .eyebrow {
+      color: #4772c5;
+      font-weight: 750;
+      font-size: 11px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      margin: 8px 0;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .badge {
+      background: #e6f5f2;
+      color: #167a6e;
+      border: 1px solid #ccebe5;
+      border-radius: 100px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(300px, .8fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .main { padding: 24px; }
+
+    .cardhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .cardhead h2, .side h2 {
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .textarea {
+      width: 100%;
+      min-height: 185px;
+      resize: vertical;
+      border: 1px solid #dbe3ee;
+      border-radius: 12px;
+      padding: 16px;
+      color: #213652;
+      font: 14px/1.7 system-ui, sans-serif;
+      outline: none;
+    }
+
+    .textarea:focus {
+      border-color: #77a0f5;
+      box-shadow: 0 0 0 3px #2864e818;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font: 700 13px system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 5px 12px #2864e82b;
+    }
+
+    .primary:hover { background: #1d55cf; }
+
+    .plain {
+      background: white;
+      border: 1px solid var(--line);
+      color: #425570;
+    }
+
+    .samples {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .samples span {
+      width: 100%;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fafbfd;
+      color: #52637a;
+      font-size: 11px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: #a9bdea;
+      background: #f4f7ff;
+    }
+
+    .side { padding: 21px; }
+
+    .side > p {
+      margin: 4px 0 19px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty {
+      min-height: 240px;
+      border: 1px dashed #d5dfec;
+      border-radius: 13px;
+      background: #fafcff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      color: #8492a6;
+    }
+
+    .shield {
+      margin: auto auto 11px;
+      width: 50px;
+      height: 50px;
+      background: #eaf1ff;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #4270ce;
+      font-size: 24px;
+    }
+
+    .empty b {
+      display: block;
+      color: #415470;
+      margin-bottom: 4px;
+    }
+
+    .result { display: none; }
+
+    .verdict {
+      border-radius: 13px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .verdict.high {
+      background: #fff0f0;
+      border: 1px solid #f6d4d5;
+    }
+
+    .verdict.med {
+      background: #fff8eb;
+      border: 1px solid #f1e2c2;
+    }
+
+    .verdict.low {
+      background: #edf8f4;
+      border: 1px solid #d1ece2;
+    }
+
+    .score {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: white;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .high .score { color: var(--red); }
+    .med .score { color: var(--amber); }
+    .low .score { color: var(--green); }
+
+    .verdict strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .verdict small {
+      display: block;
+      color: #69788d;
+      margin-top: 3px;
+    }
+
+    .meter { margin: 16px 0 20px; }
+
+    .meterline {
+      height: 7px;
+      background: #edf1f6;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 7px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      border-radius: 8px;
+      transition: width .35s;
+    }
+
+    .fill.high { background: var(--red); }
+    .fill.med { background: #dfa43c; }
+    .fill.low { background: var(--green); }
+
+    .sectionlabel {
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #718096;
+      margin: 19px 0 9px;
+    }
+
+    .signals { display: grid; gap: 8px; }
+
+    .signal {
+      display: flex;
+      gap: 9px;
+      padding: 10px;
+      border: 1px solid #edf0f5;
+      border-radius: 10px;
+      background: #fcfdff;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      flex: none;
+      border-radius: 50%;
+      background: #e3a43e;
+      margin-top: 5px;
+    }
+
+    .signal b {
+      font-size: 12px;
+      display: block;
+    }
+
+    .signal span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .advice {
+      border-radius: 10px;
+      background: #f1f5fb;
+      color: #53657e;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .foot {
+      font-size: 11px;
+      color: #8290a3;
+      text-align: center;
+      margin: 18px 0 30px;
+    }
+
+    .foot strong { color: #60738d; }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .top { padding: 0 18px; }
+      .top small { font-size: 9px; }
+      .wrap { margin-top: 24px; }
+      .main { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><div class="logo">◈</div>SignalShield</div>
+    <small>HACKATHON 2026 / AI × CYBERSECURITY</small>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Social media safety · live prototype</div>
+        <h1>Pause before you click.</h1>
+        <p>Check a message for common social-engineering pressure tactics.</p>
+      </div>
+      <div class="badge">● &nbsp;Explainable risk analysis</div>
+    </div>
+
+    <div class="grid">
+      <section class="card main">
+        <div class="cardhead">
+          <h2>Analyze a message</h2>
+          <span class="sub">Simulated-message demo</span>
+        </div>
+
+        <textarea id="msg" class="textarea"
+          placeholder="Paste a suspicious social post, DM, or email here…"></textarea>
+
+        <div class="row">
+          <button id="analyze" class="btn primary">Analyze message →</button>
+          <button id="clear" class="btn plain">Clear</button>
+        </div>
+
+        <div class="samples">
+          <span>Try a sample</span>
+          <button class="chip" data-sample="urgent">Account alert</button>
+          <button class="chip" data-sample="prize">Prize scam</button>
+          <button class="chip" data-sample="safe">Ordinary message</button>
+        </div>
+      </section>
+
+      <aside class="card side">
+        <h2>Risk assessment</h2>
+        <p>Signals found in the message and why they matter.</p>
+
+        <div id="empty" class="empty">
+          <div>
+            <div class="shield">⌁</div>
+            <b>Your result will appear here</b>
+            Paste or choose a sample message to begin.
+          </div>
+        </div>
+
+        <div id="result" class="result">
+          <div id="verdict" class="verdict">
+            <div id="score" class="score">0</div>
+            <div>
+              <strong id="title"></strong>
+              <small id="summary"></small>
+            </div>
+          </div>
+
+          <div class="meter">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:#7a899d">
+              <span>Risk indicator</span>
+              <span id="level"></span>
+            </div>
+            <div class="meterline"><div id="fill" class="fill"></div></div>
+          </div>
+
+          <div class="sectionlabel">Signals detected</div>
+          <div id="signals" class="signals"></div>
+
+          <div class="sectionlabel">Safer next step</div>
+          <div id="advice" class="advice"></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="foot">
+      <strong>Prototype note:</strong> This rule-based demo highlights patterns. It can miss context and is not proof that a message is malicious.
+    </div>
+  </main>
+
+  <script>
+    const samples = {
+      urgent: "URGENT: Your account will be suspended in 30 minutes. Verify your password now at secure-account-check.example or lose access. Do not ignore this notice!",
+      prize: "Congratulations! You have been selected to claim a $5,000 prize. Pay a small processing fee today and send your bank details to claim your reward. Offer expires soon!",
+      safe: "Hi everyone, our photography club meets in the library at 3 pm on Friday. Bring your camera if you have one. See you there!"
+    };
+
+    const rules = [
+      {
+        id: "urgency",
+        label: "Urgency / time pressure",
+        weight: 17,
+        why: "A countdown or demand to act immediately can short-circuit careful decisions.",
+        re: /\b(urgent|immediately|right now|act now|expires? (today|soon|in)|within \d+ (minutes?|hours?)|last chance|do not delay|limited time|today only)\b/gi
+      },
+      {
+        id: "fear",
+        label: "Fear or threat",
+        weight: 18,
+        why: "Threats of loss or consequences are often used to provoke a rushed response.",
+        re: /\b(lose access|account (?:will be|is) (?:suspended|closed|locked|disabled)|legal action|arrest|fine|penalty|security breach|unauthorized login|compromised|final warning)\b/gi
+      },
+      {
+        id: "authority",
+        label: "Authority impersonation cues",
+        weight: 15,
+        why: "The message claims to speak for an institution or trusted authority.",
+        re: /\b( IT (?:department|support)|security team|administrator|customer support|bank (?:team|department)|government|police|tax department|official notice|meta support|instagram support|your employer)\b/gi
+      },
+      {
+        id: "prize",
+        label: "Prize or reward claim",
+        weight: 17,
+        why: "Unexpected winnings or rewards can lure people into sharing data or paying fees.",
+        re: /\b(congratulations|you(?:'ve| have) (?:won|been selected)|claim (?:your )?(?:prize|reward|gift)|free (?:gift|iphone|money)|winner|cash prize|giveaway)\b/gi
+      },
+      {
+        id: "credentials",
+        label: "Request for secrets or payment",
+        weight: 23,
+        why: "Passwords, one-time codes, bank details, or unexpected fees should never be shared in response to a message.",
+        re: /\b(send|share|provide|enter|confirm|verify|reply with|text me|give us)\b.{0,55}\b(password|passcode|one[- ]time code|otp|verification code|bank details|card number|social security|ssn|seed phrase|recovery phrase|login details|processing fee|payment)\b|\b(password|one[- ]time code|otp|verification code|bank details|card number|seed phrase|recovery phrase)\b.{0,40}\b(send|share|provide|enter|reply|click|confirm)\b/gi
+      },
+      {
+        id: "link",
+        label: "Link or off-platform action",
+        weight: 9,
+        why: "Links in unexpected messages may lead to lookalike login pages or unsafe actions.",
+        re: /\b(click (?:here|this|the link)|visit this link|bit\.ly\/|tinyurl\.com\/|https?:\/\/|www\.)/gi
+      }
+    ];
+
+    const messageBox = document.querySelector("#msg");
+
+    function escapeHTML(text) {
+      return text.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function analyzeMessage() {
+      const text = messageBox.value.trim();
+
+      if (!text) {
+        messageBox.focus();
+        return;
+      }
+
+      const found = [];
+
+      for (const rule of rules) {
+        rule.re.lastIndex = 0;
+        const matches = [...text.matchAll(rule.re)];
+
+        if (matches.length) {
+          found.push({
+            ...rule,
+            count: matches.length,
+            examples: [...new Set(matches.map(match => match[0].trim()))].slice(0, 3)
+          });
+        }
+      }
+
+      let score = found.reduce((total, signal) => {
+        return total + signal.weight + Math.min(5, (signal.count - 1) * 2);
+      }, 0);
+
+      const hasSecretsRequest = found.some(signal => signal.id === "credentials");
+      const hasLink = found.some(signal => signal.id === "link");
+
+      if (hasSecretsRequest && hasLink) score += 8;
+      score = Math.min(98, score);
+
+      const level = score >= 55 ? "high" : score >= 28 ? "med" : "low";
+
+      const descriptions = {
+        high: [
+          "High risk indicators",
+          "Multiple pressure tactics detected. Treat this message with caution."
+        ],
+        med: [
+          "Some warning signs",
+          "This message contains patterns worth checking independently."
+        ],
+        low: [
+          "Few common indicators",
+          "No strong patterns detected; this does not guarantee safety."
+        ]
+      };
+
+      document.querySelector("#empty").style.display = "none";
+      document.querySelector("#result").style.display = "block";
+
+      const verdict = document.querySelector("#verdict");
+      verdict.className = `verdict ${level}`;
+
+      document.querySelector("#score").textContent = score;
+      document.querySelector("#title").textContent = descriptions[level][0];
+      document.querySelector("#summary").textContent = descriptions[level][1];
+      document.querySelector("#level").textContent =
+        level === "high" ? "HIGH" : level === "med" ? "MODERATE" : "LOW";
+
+      const fill = document.querySelector("#fill");
+      fill.className = `fill ${level}`;
+      fill.style.width = `${score}%`;
+
+      const signalsBox = document.querySelector("#signals");
+
+      if (found.length) {
+        signalsBox.innerHTML = found.map(signal => `
+          <div class="signal">
+            <i class="dot"></i>
+            <div>
+              <b>${signal.label}</b>
+              <span>Matched: “${escapeHTML(signal.examples.join("”, “"))}” — ${signal.why}</span>
+            </div>
+          </div>
+        `).join("");
+      } else {
+        signalsBox.innerHTML = `
+          <div class="signal">
+            <i class="dot" style="background:#43a58a"></i>
+            <div>
+              <b>No listed signals found</b>
+              <span>This detector checks a limited set of text patterns only.</span>
+            </div>
+          </div>`;
+      }
+
+      const advice = {
+        high: "Do not click links, pay, or share passwords or codes. Contact the organization through its official app or a phone number you already trust.",
+        med: "Pause and verify the sender through a separate, trusted channel. Never share passwords or one-time codes.",
+        low: "Still check the sender and destination before clicking. When in doubt, open the official app or website yourself."
+      };
+
+      document.querySelector("#advice").textContent = advice[level];
+    }
+
+    document.querySelector("#analyze").addEventListener("click", analyzeMessage);
+
+    document.querySelector("#clear").addEventListener("click", () => {
+      messageBox.value = "";
+      document.querySelector("#result").style.display = "none";
+      document.querySelector("#empty").style.display = "grid";
+      messageBox.focus();
+    });
+
+    document.querySelectorAll(".chip").forEach(button => {
+      button.addEventListener("click", () => {
+        messageBox.value = samples[button.dataset.sample];
+        analyzeMessage();
+      });
+    });
+  </script>
+</body>
+</html>
+```
