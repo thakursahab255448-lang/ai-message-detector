@@ -1,6 +1,3 @@
-Copy this into a file named **`index.html`** in your GitHub repository. It’s a single-file demo, so no installation is needed.
-
-```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,19 +22,20 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
 
     body {
       margin: 0;
-      background: var(--paper);
+      background: radial-gradient(ellipse at 12% 0%, #e3edff 0, transparent 33%), #f4f7fb;
       color: var(--ink);
-      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+      font: 15px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
     .top {
       height: 68px;
-      background: var(--navy);
+      background: linear-gradient(105deg, #0d203b, #163d70 62%, #1c5a9e);
       color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 max(calc((100vw - 1180px) / 2), 24px);
+      box-shadow: 0 6px 24px #10274620;
     }
 
     .brand {
@@ -45,16 +43,18 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
       align-items: center;
       gap: 11px;
       font-weight: 750;
+      letter-spacing: .2px;
     }
 
     .logo {
       width: 34px;
       height: 34px;
       border-radius: 11px;
-      background: #1e75e9;
+      background: linear-gradient(145deg, #62a8ff, #3762f5);
       display: grid;
       place-items: center;
       font-size: 19px;
+      box-shadow: 0 5px 16px #4d8cf566;
     }
 
     .top small {
@@ -64,64 +64,93 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     }
 
     .wrap {
-      max-width: 1180px;
-      margin: 32px auto;
+      max-width: 1220px;
+      margin: 28px auto;
       padding: 0 22px;
     }
 
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      min-height: 190px;
+      padding: 30px 34px;
+      border-radius: 22px;
+      background: linear-gradient(115deg, #102747 0%, #174780 58%, #2864b4 100%);
+      box-shadow: 0 18px 40px #163b6c28;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 280px;
+      height: 280px;
+      border: 1px solid #ffffff25;
+      border-radius: 50%;
+      right: 7%;
+      top: -112px;
+      box-shadow: 0 0 0 30px #ffffff08, 0 0 0 62px #ffffff06;
+    }
+
     .eyebrow {
-      color: #4772c5;
+      color: #a9c8ff;
       font-weight: 750;
       font-size: 11px;
       letter-spacing: 1.3px;
       text-transform: uppercase;
     }
 
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: end;
-      margin-bottom: 22px;
-    }
-
     .hero h1 {
-      font-size: 30px;
+      color: #fff;
+      font-size: 36px;
       line-height: 1.15;
+      letter-spacing: -.8px;
       margin: 8px 0;
     }
 
     .hero p {
-      color: var(--muted);
+      color: #d4e2f8;
       margin: 0;
     }
 
     .badge {
-      background: #e6f5f2;
-      color: #167a6e;
-      border: 1px solid #ccebe5;
+      color: #d9fff4;
+      background: #ffffff16;
+      border: 1px solid #ffffff30;
       border-radius: 100px;
       padding: 8px 12px;
       font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
+      backdrop-filter: blur(8px);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(300px, .8fr);
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(330px, .85fr);
+      gap: 22px;
       align-items: start;
     }
 
     .card {
       background: white;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
+      border: 1px solid #e6ebf3;
+      border-radius: 20px;
+      box-shadow: 0 14px 38px #183b6710;
+      transition: box-shadow .2s;
     }
 
-    .main { padding: 24px; }
+    .card:hover {
+      box-shadow: 0 18px 46px #183b6717;
+    }
+
+    .main, .side { padding: 25px; }
 
     .cardhead {
       display: flex;
@@ -131,30 +160,36 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     }
 
     .cardhead h2, .side h2 {
-      font-size: 17px;
+      font-size: 18px;
+      letter-spacing: -.2px;
       margin: 0;
     }
 
     .sub {
       font-size: 12px;
       color: var(--muted);
+      background: #f0f4fb;
+      border-radius: 100px;
+      padding: 5px 9px;
     }
 
     .textarea {
       width: 100%;
-      min-height: 185px;
+      min-height: 200px;
       resize: vertical;
-      border: 1px solid #dbe3ee;
-      border-radius: 12px;
-      padding: 16px;
+      border: 1px solid #dce5f1;
+      border-radius: 15px;
+      padding: 18px;
       color: #213652;
-      font: 14px/1.7 system-ui, sans-serif;
+      background: linear-gradient(180deg, #fcfdff, #fff);
+      font: 14px/1.75 system-ui, sans-serif;
       outline: none;
+      transition: .2s;
     }
 
     .textarea:focus {
-      border-color: #77a0f5;
-      box-shadow: 0 0 0 3px #2864e818;
+      border-color: #6895f3;
+      box-shadow: 0 0 0 4px #2864e814;
     }
 
     .row {
@@ -166,19 +201,25 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
 
     .btn {
       border: 0;
-      border-radius: 10px;
-      padding: 11px 16px;
+      border-radius: 11px;
+      padding: 12px 17px;
       font: 700 13px system-ui, sans-serif;
       cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
     }
+
+    .btn:hover { transform: translateY(-1px); }
 
     .primary {
-      background: var(--blue);
+      background: linear-gradient(105deg, #3479f6, #5b5de8);
       color: white;
-      box-shadow: 0 5px 12px #2864e82b;
+      box-shadow: 0 8px 17px #3f6ee238;
     }
 
-    .primary:hover { background: #1d55cf; }
+    .primary:hover {
+      background: linear-gradient(105deg, #2869e8, #4f4fd6);
+      box-shadow: 0 10px 20px #3f6ee244;
+    }
 
     .plain {
       background: white;
@@ -197,25 +238,25 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
       width: 100%;
       font-size: 11px;
       color: var(--muted);
+      margin-bottom: 1px;
     }
 
     .chip {
-      padding: 7px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: #fafbfd;
+      padding: 8px 11px;
+      border-radius: 10px;
+      border: 1px solid #e4eaf4;
+      background: #f8faff;
       color: #52637a;
       font-size: 11px;
       font-weight: 650;
       cursor: pointer;
+      transition: .16s;
     }
 
     .chip:hover {
-      border-color: #a9bdea;
-      background: #f4f7ff;
+      transform: translateY(-1px);
+      background: #eef4ff;
     }
-
-    .side { padding: 21px; }
 
     .side > p {
       margin: 4px 0 19px;
@@ -225,9 +266,9 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
 
     .empty {
       min-height: 240px;
-      border: 1px dashed #d5dfec;
-      border-radius: 13px;
-      background: #fafcff;
+      border: 1px dashed #ccd8e9;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #f8faff, #f4f8ff);
       display: grid;
       place-items: center;
       text-align: center;
@@ -245,6 +286,7 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
       place-items: center;
       color: #4270ce;
       font-size: 24px;
+      box-shadow: 0 7px 18px #4270ce1b;
     }
 
     .empty b {
@@ -256,8 +298,8 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     .result { display: none; }
 
     .verdict {
-      border-radius: 13px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 17px;
       display: flex;
       align-items: center;
       gap: 13px;
@@ -279,14 +321,15 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     }
 
     .score {
-      width: 54px;
-      height: 54px;
+      width: 66px;
+      height: 66px;
       border-radius: 50%;
       display: grid;
       place-items: center;
       background: white;
-      font-size: 17px;
+      font-size: 20px;
       font-weight: 800;
+      box-shadow: 0 4px 14px #14263f12;
     }
 
     .high .score { color: var(--red); }
@@ -295,7 +338,7 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
 
     .verdict strong {
       display: block;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .verdict small {
@@ -307,9 +350,9 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     .meter { margin: 16px 0 20px; }
 
     .meterline {
-      height: 7px;
-      background: #edf1f6;
-      border-radius: 8px;
+      height: 9px;
+      background: #edf1f8;
+      border-radius: 20px;
       overflow: hidden;
       margin-top: 7px;
     }
@@ -317,7 +360,7 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     .fill {
       height: 100%;
       width: 0;
-      border-radius: 8px;
+      border-radius: 20px;
       transition: width .35s;
     }
 
@@ -334,24 +377,28 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
       margin: 19px 0 9px;
     }
 
-    .signals { display: grid; gap: 8px; }
+    .signals {
+      display: grid;
+      gap: 8px;
+    }
 
     .signal {
       display: flex;
       gap: 9px;
-      padding: 10px;
-      border: 1px solid #edf0f5;
-      border-radius: 10px;
-      background: #fcfdff;
+      padding: 12px;
+      border: 1px solid #e9eef6;
+      border-radius: 12px;
+      background: #fff;
     }
 
     .dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       flex: none;
       border-radius: 50%;
       background: #e3a43e;
       margin-top: 5px;
+      box-shadow: 0 0 0 4px #e3a43e20;
     }
 
     .signal b {
@@ -365,11 +412,13 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     }
 
     .advice {
-      border-radius: 10px;
-      background: #f1f5fb;
+      border: 1px solid #e4eaf4;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #f3f7ff, #f7faff);
       color: #53657e;
       padding: 12px;
       font-size: 12px;
+      line-height: 1.65;
     }
 
     .foot {
@@ -377,20 +426,28 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
       color: #8290a3;
       text-align: center;
       margin: 18px 0 30px;
+      padding: 13px;
+      background: #edf2fa;
+      border: 1px solid #e4eaf3;
+      border-radius: 12px;
     }
 
     .foot strong { color: #60738d; }
 
     @media (max-width: 760px) {
-      .grid { grid-template-columns: 1fr; }
       .hero {
+        padding: 25px 22px;
+        min-height: 0;
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .hero h1 { font-size: 29px; }
+      .grid { grid-template-columns: 1fr; }
       .top { padding: 0 18px; }
       .top small { font-size: 9px; }
       .wrap { margin-top: 24px; }
-      .main { padding: 18px; }
+      .main, .side { padding: 19px; }
     }
   </style>
 </head>
@@ -472,7 +529,8 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
     </div>
 
     <div class="foot">
-      <strong>Prototype note:</strong> This rule-based demo highlights patterns. It can miss context and is not proof that a message is malicious.
+      <strong>Prototype note:</strong>
+      This rule-based demo highlights patterns; it can miss context and is not proof that a message is malicious.
     </div>
   </main>
 
@@ -489,7 +547,7 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
         label: "Urgency / time pressure",
         weight: 17,
         why: "A countdown or demand to act immediately can short-circuit careful decisions.",
-        re: /\b(urgent|immediately|right now|act now|expires? (today|soon|in)|within \d+ (minutes?|hours?)|last chance|do not delay|limited time|today only)\b/gi
+        re: /\b(urgent|immediately|right now|act now|claim (?:it|your prize|your reward)? ?now|expires? (?:today|soon|in)|within \d+ (?:minutes?|hours?)|last chance|do not delay|limited time|today only|pay today|offer ends? today)\b/gi
       },
       {
         id: "fear",
@@ -518,6 +576,13 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
         weight: 23,
         why: "Passwords, one-time codes, bank details, or unexpected fees should never be shared in response to a message.",
         re: /\b(send|share|provide|enter|confirm|verify|reply with|text me|give us)\b.{0,55}\b(password|passcode|one[- ]time code|otp|verification code|bank details|card number|social security|ssn|seed phrase|recovery phrase|login details|processing fee|payment)\b|\b(password|one[- ]time code|otp|verification code|bank details|card number|seed phrase|recovery phrase)\b.{0,40}\b(send|share|provide|enter|reply|click|confirm)\b/gi
+      },
+      {
+        id: "payment",
+        label: "Unexpected fee or payment request",
+        weight: 21,
+        why: "Scam messages may invent fees or ask for money to claim a prize or solve an account problem.",
+        re: /\b(pay|send|transfer|wire|cash app|venmo|payment of|fee of)\b.{0,45}\b(?:a |the |small |processing )?(?:fee|money|payment|deposit|charge)\b|\b(?:processing fee|claim fee|delivery fee|release fee|small fee|pay a fee)\b/gi
       },
       {
         id: "link",
@@ -563,17 +628,24 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
         }
       }
 
-      let score = found.reduce((total, signal) => {
+      let rawScore = found.reduce((total, signal) => {
         return total + signal.weight + Math.min(5, (signal.count - 1) * 2);
       }, 0);
 
-      const hasSecretsRequest = found.some(signal => signal.id === "credentials");
+      const hasCredential = found.some(signal => signal.id === "credentials");
+      const hasPrize = found.some(signal => signal.id === "prize");
+      const hasPayment = found.some(signal => signal.id === "payment");
+      const hasUrgency = found.some(signal => signal.id === "urgency");
       const hasLink = found.some(signal => signal.id === "link");
 
-      if (hasSecretsRequest && hasLink) score += 8;
-      score = Math.min(98, score);
+      // Related signals together raise risk more than an isolated phrase.
+      if (hasCredential && hasLink) rawScore += 8;
+      if (hasPrize && (hasCredential || hasPayment)) rawScore += 10;
+      if (hasCredential && hasPayment) rawScore += 8;
+      if (hasUrgency && (hasPrize || hasCredential || hasPayment)) rawScore += 5;
 
-      const level = score >= 55 ? "high" : score >= 28 ? "med" : "low";
+      const score = Math.min(98, rawScore);
+      const level = score >= 60 ? "high" : score >= 30 ? "med" : "low";
 
       const descriptions = {
         high: [
@@ -656,4 +728,3 @@ Copy this into a file named **`index.html`** in your GitHub repository. It’s a
   </script>
 </body>
 </html>
-```
